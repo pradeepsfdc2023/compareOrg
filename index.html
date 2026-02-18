@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salesforce Org Comparison Tool</title>
+    <link rel="stylesheet" href="compareOrg.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔄 Salesforce Org Comparison</h1>
+      <p class="subtitle">
+        Compare configurations and metadata between two Salesforce organizations
+      </p>
+
+      <div style="display: flex; align-items: center; gap: 10px">
+        <button class="api-key-btn" id="apiKeyBtn" onclick="openApiModal()">
+          <span id="apiKeyBtnText">⚙️ Configure ChatGPT API Key</span>
+        </button>
+      </div>
+
+      <form id="compareForm">
+        <div class="org-section">
+          <div class="org-input">
+            <label for="org1Name">Organization 1 Name</label>
+            <input
+              type="text"
+              id="org1Name"
+              placeholder="e.g., Production"
+              required
+            />
+          </div>
+          <div class="org-input">
+            <label for="org2Name">Organization 2 Name</label>
+            <input
+              type="text"
+              id="org2Name"
+              placeholder="e.g., Sandbox"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="org-section">
+          <div class="org-input">
+            <label for="org1Url">Org 1 Instance URL</label>
+            <input
+              type="text"
+              id="org1Url"
+              placeholder="https://yourinstance.salesforce.com"
+              required
+            />
+          </div>
+          <div class="org-input">
+            <label for="org2Url">Org 2 Instance URL</label>
+            <input
+              type="text"
+              id="org2Url"
+              placeholder="https://yourinstance.salesforce.com"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="org-section">
+          <div class="org-input">
+            <label for="org1Token">Org 1 Access Token</label>
+            <input
+              type="password"
+              id="org1Token"
+              placeholder="Enter access token"
+              required
+            />
+          </div>
+          <div class="org-input">
+            <label for="org2Token">Org 2 Access Token</label>
+            <input
+              type="password"
+              id="org2Token"
+              placeholder="Enter access token"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button
+            class="api-key-btn"
+            id="connectOrg1Btn"
+            type="button"
+            onclick="connectOrg(1)"
+          >
+            <span id="connectOrg1BtnText">🔗 Connect Org 1</span>
+          </button>
+
+          <button
+            class="api-key-btn"
+            id="connectOrg2Btn"
+            type="button"
+            onclick="connectOrg(2)"
+          >
+            <span id="connectOrg2BtnText">🔗 Connect Org 2</span>
+          </button>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="btn-compare">🚀 Compare Orgs</button>
+          <button type="reset" class="btn-reset" onclick="reset()">
+            🔄 Reset
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- API Key Modal -->
+    <div id="apiModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">ChatGPT API Configuration</div>
+        <div class="modal-body">
+          <label for="apiKey">API Key</label>
+          <input type="password" id="apiKey" placeholder="sk-..." />
+          <label for="apiModel">Model (Optional)</label>
+          <input type="text" id="apiModel" placeholder="gpt-4" value="gpt-4" />
+        </div>
+        <div id="status" class="status"></div>
+        <div class="modal-buttons">
+          <button class="btn-save" onclick="saveApiKey()">Save</button>
+          <button class="btn-cancel" onclick="closeApiModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="compareOrg.js"></script>
+  </body>
+</html>
